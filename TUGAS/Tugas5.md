@@ -8,3 +8,4 @@ SEARCH NAMA
 ![alt text](<ss/ENDPOINT SEARCH NAMA.png>)
 SEARCH TANGGAL
 ![alt text](ss/TANGGALLLLL.png)
+...

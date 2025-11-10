@@ -1,5 +1,0 @@
-![alt text](<ss/ENDPOINT UPDATE PRESENSI.png>)
-![alt text](<ss/ENDPOINT UPDATE JIKA TANGGAL TIDAK VALID.png>)
-![alt text](<ss/ENDPOINT SEARCH NAMA.png>)
-![alt text](<ss/ENDPOINT DELETE DATA.png>)
-![alt text](ss/TANGGALLLLL.png)

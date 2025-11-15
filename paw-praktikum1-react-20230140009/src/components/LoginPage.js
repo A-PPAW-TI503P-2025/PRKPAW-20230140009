@@ -36,10 +36,10 @@ function LoginPage() {
       <div className="bg-gray-800 p-10 rounded-xl shadow-2xl w-full max-w-sm border-t-4 border-cyan-400">
         
         <h2 className="text-4xl font-extrabold text-center mb-2 text-white">
-          SISTEM LOGIN
+          LOGIN MOAL?
         </h2>
         <p className="text-center mb-8 text-cyan-400 text-sm font-light tracking-widest">
-            AUTHENTICATION REQUIRED
+            SILAHKAN LOGIN DULU
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">

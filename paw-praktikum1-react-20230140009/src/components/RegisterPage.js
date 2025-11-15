@@ -36,15 +36,16 @@ function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+    <div className="flex flex-col items-center justify-center p-4"
+    style={{ backgroundColor: '#234C6A' }}>
       {/* Container utama dengan background gelap dan border neon effect (cyan) */}
-      <div className="bg-gray-800 p-10 rounded-xl shadow-2xl w-full max-w-md border-t-4 border-cyan-400">
+      <div className="bg-gray-900 p-10 rounded-xl shadow-2xl w-full max-w-md border-t-4 border-cyan-400">
         
         <h2 className="text-4xl font-extrabold text-center mb-2 text-white">
           DAFTAR AKUN
         </h2>
         <p className="text-center mb-8 text-cyan-400 text-sm font-light tracking-widest">
-            NEW USER REGISTRATION
+            DAFTAR DULU KIDS
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -65,7 +66,7 @@ function RegisterPage() {
               onChange={(e) => setNama(e.target.value)}
               required
               placeholder="Masukkan nama Anda"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
             />
           </div>
 
@@ -84,7 +85,7 @@ function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="contoh@domain.com"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
             />
           </div>
           
@@ -103,7 +104,7 @@ function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="********"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
             />
           </div>
           
@@ -120,7 +121,7 @@ function RegisterPage() {
               value={role}
               onChange={(e) => setRole(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150 appearance-none"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150 appearance-none"
             >
                 <option value="mahasiswa">Mahasiswa</option>
                 <option value="admin">Admin</option>

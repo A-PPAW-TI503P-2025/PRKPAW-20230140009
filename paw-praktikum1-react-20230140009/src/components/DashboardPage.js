@@ -47,11 +47,12 @@ function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 font-sans">
+    <div className="text-white p-6 font-sans"
+        style={{ backgroundColor: '#234C6A' }}>
       
       {/* --- Header Dashboard (Navigasi & Logout) --- */}
-      <header className="flex justify-between items-center py-4 border-b border-gray-700">
-        <h1 className="text-3xl font-extrabold text-cyan-400 tracking-wider">
+      <header className="flex justify-between items-center py-4 border-b border-gray-200">
+        <h1 className="text-3xl font-extrabold text-cyan-300 tracking-wider">
           {userRole === 'Admin' ? 'ADMIN PANEL' : 'DASHBOARD PENGGUNA'}
         </h1>
         <button
@@ -65,7 +66,7 @@ function DashboardPage() {
       </header>
       
       {/* --- Greeting Card --- */}
-      <div className="mt-8 bg-gray-800 p-8 rounded-xl shadow-lg border-l-4 border-cyan-500">
+      <div className="mt-8 bg-gray-900 p-8 rounded-xl shadow-lg border-l-4 border-cyan-500">
         <p className="text-sm text-gray-400 mb-1">Selamat datang kembali,</p>
         <h2 className="text-4xl font-bold mb-4">
           {userName}
@@ -79,19 +80,19 @@ function DashboardPage() {
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* Widget 1: Status */}
-        <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition duration-300">
+        <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-cyan-600/30 transition duration-300">
           <h3 className="text-xl font-semibold mb-3 text-cyan-400">Status Akun</h3>
           <p className="text-gray-300">Akun Anda aktif dan terverifikasi. Semua layanan tersedia.</p>
         </div>
 
         {/* Widget 2: Data Terbaru */}
-        <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition duration-300">
+        <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-cyan-600/30 transition duration-300">
           <h3 className="text-xl font-semibold mb-3 text-cyan-400">Pembaruan Sistem</h3>
           <p className="text-gray-300">Versi terbaru telah diterapkan pada 15 Nov 2025.</p>
         </div>
         
         {/* Widget 3: Akses Cepat */}
-        <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition duration-300">
+        <div className="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-cyan-600/30 transition duration-300">
           <h3 className="text-xl font-semibold mb-3 text-cyan-400">Akses Cepat</h3>
           <button className="text-sm bg-cyan-600/50 hover:bg-cyan-600 px-4 py-2 rounded-md transition duration-150 text-white">
             Lihat Profil
@@ -101,7 +102,7 @@ function DashboardPage() {
       </div>
 
       {/* --- Footer --- */}
-      <footer className="text-center mt-12 text-gray-500 text-sm border-t border-gray-700 pt-4">
+      <footer className="text-center mt-12 text-gray-200 text-sm border-t border-gray-200 pt-4">
         &copy; 2025 Aplikasi PAW. Hak Cipta Dilindungi.
       </footer>
     </div>

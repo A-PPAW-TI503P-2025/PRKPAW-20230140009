@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,26 +20,29 @@ function LoginPage() {
       });
 
       const token = response.data.token;
+      // Perhatian: Penggunaan localStorage di React di lingkungan Canvas tidak disarankan,
+      // tetapi digunakan di sini sesuai kebutuhan otentikasi.
       localStorage.setItem('token', token); 
 
       navigate('/dashboard');
 
     } catch (err) {
-      // 4. Tangani error dari server
+      // Tangani error dari server
       setError(err.response ? err.response.data.message : 'Login gagal');
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
-      {/* Container utama dengan background gelap dan border neon effect */}
-      <div className="bg-gray-800 p-10 rounded-xl shadow-2xl w-full max-w-sm border-t-4 border-cyan-400">
+    <div className="flex flex-col items-center justify-center p-4"
+    style={{ backgroundColor: '#234C6A' }}>
+      {/* Container utama dengan background gelap dan border neon effect (cyan) */}
+      <div className="bg-gray-900 p-10 rounded-xl shadow-2xl w-full max-w-sm border-t-4 border-cyan-400">
         
         <h2 className="text-4xl font-extrabold text-center mb-2 text-white">
           LOGIN MOAL?
         </h2>
         <p className="text-center mb-8 text-cyan-400 text-sm font-light tracking-widest">
-            SILAHKAN LOGIN DULU
+            SILAHKAN LOGIN DULU KIDS!
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -58,7 +61,7 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Masukkan email Anda"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
             />
           </div>
           
@@ -76,7 +79,7 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="********"
-              className="w-full px-4 py-3 bg-gray-700 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
             />
           </div>
           
@@ -94,10 +97,15 @@ function LoginPage() {
           </div>
         )}
         
-        <div className="text-center mt-6">
-            <a href="#" className="text-sm text-cyan-400 hover:text-cyan-300 font-medium">
-                Lupa Kata Sandi?
-            </a>
+        {/* Tautan Register, dipastikan berada di dalam card */}
+        <div className="text-center mt-6 pt-4 border-t border-gray-700">
+            <p className="text-sm text-gray-400">
+                Belum punya akun? 
+                {/* Menggunakan Link untuk navigasi */}
+                <Link to="/register" className="text-cyan-400 hover:text-cyan-300 font-medium ml-1">
+                    Daftar di sini
+                </Link>
+            </p>
         </div>
       </div>
     </div>

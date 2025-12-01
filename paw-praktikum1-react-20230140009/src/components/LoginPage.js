@@ -33,27 +33,16 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4"
-    style={{ backgroundColor: '#234C6A' }}>
-      {/* Container utama dengan background gelap dan border neon effect (cyan) */}
-      <div className="bg-gray-900 p-10 rounded-xl shadow-2xl w-full max-w-sm border-t-4 border-cyan-400">
-        
-        <h2 className="text-4xl font-extrabold text-center mb-2 text-white">
-          LOGIN MOAL?
-        </h2>
-        <p className="text-center mb-8 text-cyan-400 text-sm font-light tracking-widest">
-            SILAHKAN LOGIN DULU KIDS!
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
+      <div className="bg-white p-10 rounded-lg shadow-md w-full max-w-sm text-center">
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">Login</h2>
+        <p className="text-center mb-8 text-blue-400 text-sm font-light tracking-widest">
+          Silakan login untuk masuk
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          
           <div>
-            <label 
-              htmlFor="email" 
-              className="block text-xs font-medium text-gray-400 mb-1 uppercase tracking-wider"
-            >
-              Email Address
-            </label>
+            <label htmlFor="email" className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Email Address</label>
             <input
               id="email"
               type="email"
@@ -61,17 +50,11 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Masukkan email Anda"
-              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
             />
           </div>
-          
           <div>
-            <label 
-              htmlFor="password" 
-              className="block text-xs font-medium text-gray-400 mb-1 uppercase tracking-wider"
-            >
-              Password
-            </label>
+            <label htmlFor="password" className="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Password</label>
             <input
               id="password"
               type="password"
@@ -79,33 +62,30 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="********"
-              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition duration-150"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
             />
           </div>
-          
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-cyan-500 text-gray-900 font-bold rounded-md shadow-lg hover:bg-cyan-400 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition duration-200 uppercase tracking-widest"
+            className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 uppercase tracking-widest"
           >
             Masuk
           </button>
         </form>
-        
+
         {error && (
-          <div className="bg-red-900 border border-red-500 p-3 mt-6 rounded-md">
-            <p className="text-red-300 text-sm font-medium text-center">{error}</p>
+          <div className="bg-red-100 border border-red-400 p-3 mt-6 rounded-md">
+            <p className="text-red-600 text-sm font-medium text-center">{error}</p>
           </div>
         )}
-        
-        {/* Tautan Register, dipastikan berada di dalam card */}
-        <div className="text-center mt-6 pt-4 border-t border-gray-700">
-            <p className="text-sm text-gray-400">
-                Belum punya akun? 
-                {/* Menggunakan Link untuk navigasi */}
-                <Link to="/register" className="text-cyan-400 hover:text-cyan-300 font-medium ml-1">
-                    Daftar di sini
-                </Link>
-            </p>
+
+        <div className="text-center mt-6">
+          <p className="text-sm text-gray-500">
+            Belum punya akun?
+            <Link to="/register" className="text-blue-500 hover:text-blue-400 font-medium ml-1">
+              Daftar di sini
+            </Link>
+          </p>
         </div>
       </div>
     </div>

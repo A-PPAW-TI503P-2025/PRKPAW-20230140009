@@ -1,3 +1,4 @@
+// migrations/...-create-user.js (REVISI)
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,21 +10,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
+      // Kolom unik pengguna
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true 
+        unique: true
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false
       },
       role: {
-        type: Sequelize.ENUM('mahasiswa', 'admin'), 
+        type: Sequelize.ENUM('mahasiswa', 'admin'),
         allowNull: false,
         defaultValue: 'mahasiswa'
       },

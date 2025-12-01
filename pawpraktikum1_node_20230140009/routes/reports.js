@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const reportController = require('../controllers/reportController');
-const { addUserData, isAdmin } = require('../middleware/permissionMiddleware');
+const reportController = require('../controllers/reportController'); 
+const { authenticateToken, isAdmin } = require('../middleware/permissionMiddleware'); 
 
-router.get('/daily', [addUserData, isAdmin], reportController.getDailyReport);
+// Route lama
+router.get('/daily', authenticateToken, isAdmin, reportController.getDailyReport);
+
+// Route baru agar /api/reports bisa diakses dari frontend
+router.get('/', authenticateToken, isAdmin, reportController.getDailyReport);
+
 module.exports = router;

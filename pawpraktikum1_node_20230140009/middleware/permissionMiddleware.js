@@ -1,18 +1,33 @@
-exports.addUserData = (req, res, next) => {
-    console.log("Middleware: Menambahkan data user ke tiruan (dummy)..");
-    req.user = {
-        id: 8,
-        nama: "Garnacho",
-        role: "mahasiswa"
-    };
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
+
+exports.authenticateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) {
+    return res
+      .status(401)
+      .json({ message: "Akses ditolak. Token tidak disediakan." });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, userPayload) => {
+    if (err) {
+      return res
+        .status(403)
+        .json({ message: "Token tidak valid atau kedaluwarsa." });
+    }
+    req.user = userPayload;
     next();
-}
- 	exports.isAdmin = (req, res, next) => {
- 	  if (req.user && req.user.role === "admin") {
- 	    console.log('Middleware: apakah user adalah admin..');
- 	    next(); 
- 	  } else {
- 	    console.log('Middleware: Gagal! Pengguna bukan admin.');
- 	    return res.status(403).json({ message: 'Akses ditolak: Hanya untuk admin'});
- 	  }
- 	};
+  });
+};
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    return res
+      .status(403)
+      .json({ message: "Akses ditolak. Hanya untuk admin." });
+  }
+};

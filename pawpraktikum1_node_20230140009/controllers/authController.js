@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');	
-const JWT_SECRET = 'INI_ADALAH_KUNCI_RAHASIA_ANDA_YANG_SANGAT_AMAN';
+const jwt = require('jsonwebtoken');
 const db = require('../models'); 
 const User = db.User;
 
@@ -38,7 +37,6 @@ exports.register = async (req, res) => {
   }
 };
 
-
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -54,21 +52,23 @@ exports.login = async (req, res) => {
     }
 
     const payload = {
-      id: user.id,
-      nama: user.nama,
-      role: user.role 
-    };
+            id: user.id,
+            nama: user.nama,
+            role: user.role 
+        };
+        console.log('JWT Secret Loaded:', process.env.JWT_SECRET ? 'YES' : 'NO');
+        console.log('Secret value:', process.env.JWT_SECRET);
+        // Ganti JWT_SECRET hardcode dengan process.env.JWT_SECRET
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+            expiresIn: '1h' 
+        });
 
-    const token = jwt.sign(payload, JWT_SECRET, {
-      expiresIn: '1h' 
-    });
+        res.json({
+            message: "Login berhasil",
+            token: token 
+        });
 
-    res.json({
-      message: "Login berhasil",
-      token: token 
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: "Terjadi kesalahan pada server", error: error.message });
-  }
+    } catch (error) {
+        res.status(500).json({ message: "Terjadi kesalahan pada server", error: error.message });
+    }
 };

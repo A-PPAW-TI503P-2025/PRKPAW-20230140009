@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan"); // Logger yang lebih baik
@@ -18,7 +19,9 @@ const authRoutes = require("./routes/auth");
 app.use(cors()); // Mengizinkan Cross-Origin Resource Sharing
 app.use(express.json()); // Mem-parsing body JSON dari request
 app.use(morgan("dev")); 
-
+app.use('/api/attendance', presensiRoutes);
+app.use('/api/reports', reportRoutes);
+app.use('/api/auth', authRoutes);
 // --- 3. Logger manual Anda dihapus ---
 // (Karena 'morgan' sudah melakukan hal yang sama dengan lebih baik)
 // app.use((req, res, next) => {
@@ -35,7 +38,6 @@ app.get("/", (req, res) => {
 app.use("/api/books", ruteBuku);
 app.use("/api/presensi", presensiRoutes);
 app.use("/api/reports", reportRoutes);
-app.use('/api/auth', authRoutes);
 
 // --- 4. Sinkronkan Database dan Jalankan Server (PERBAIKAN UTAMA) ---
 // Ini akan menjalankan db.sequelize.sync() SEBELUM server Penuh.

@@ -1,50 +1,56 @@
 'use strict';
 const {
-  Model
+  Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Presensi extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-  Presensi.belongsTo(models.User, {
-    foreignKey: 'userId', 
-    as: 'user' 
-  });
+  class Presensi extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+  Presensi.belongsTo(models.User, {
+    foreignKey: 'userId', 
+    as: 'user' 
+  });
 }
 
-  }
-  Presensi.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+  }
+  Presensi.init({
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nama: {
+      type: DataTypes.STRING,
+      allowNull: true, // Tidak wajib diisi
+    },
+    checkIn: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    checkOut: {
+      type: DataTypes.DATE,
+      allowNull: true, // Boleh null
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    longitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    // --- KOREKSI: TAMBAHKAN KOLOM buktiFoto ---
+    buktiFoto: {
+      type: DataTypes.STRING, // Harus sesuai dengan tipe data di migrasi Anda
+      allowNull: true,
     },
-    nama: {
-      type: DataTypes.STRING,
-      allowNull: true, // Tidak wajib diisi
-    },
-    checkIn: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    checkOut: {
-      type: DataTypes.DATE,
-      allowNull: true, // Boleh null
-    },
-    latitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    longitude: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-  }, {
-    sequelize,
-    modelName: 'Presensi',
-  });
-  return Presensi;
+    // ------------------------------------------
+  }, {
+    sequelize,
+    modelName: 'Presensi',
+  });
+  return Presensi;
 };

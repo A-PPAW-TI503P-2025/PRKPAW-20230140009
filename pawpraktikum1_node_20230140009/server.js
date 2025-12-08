@@ -14,6 +14,10 @@ const presensiRoutes = require("./routes/presensi");
 const reportRoutes = require("./routes/reports");
 const ruteBuku = require("./routes/books");
 const authRoutes = require("./routes/auth");
+const path = require('path'); 
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // Middleware
 app.use(cors()); // Mengizinkan Cross-Origin Resource Sharing

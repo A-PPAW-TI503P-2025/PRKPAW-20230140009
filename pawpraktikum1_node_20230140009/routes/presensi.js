@@ -1,12 +1,18 @@
+// routes/presensi.js
+
 const express = require('express');
 const router = express.Router();
-const presensiController = require('../controllers/presensiController');
-const { authenticateToken, isAdmin } = require('../middleware/permissionMiddleware'); 
 
+// IMPORT CONTROLLER AS A SINGLE OBJECT
+const presensiController = require('../controllers/presensiController'); 
+
+const { authenticateToken } = require('../middleware/permissionMiddleware'); 
 const { validateUpdatePresensi } = require('../middleware/validationMiddleware'); 
 
 
-router.post('/check-in', authenticateToken, presensiController.CheckIn);
+// Use presensiController.upload and presensiController.CheckIn
+router.post('/check-in', [authenticateToken, presensiController.upload.single('image')], presensiController.CheckIn);
+
 router.post('/check-out', authenticateToken, presensiController.CheckOut);
 router.delete('/:id', authenticateToken, presensiController.deletePresensi);
 

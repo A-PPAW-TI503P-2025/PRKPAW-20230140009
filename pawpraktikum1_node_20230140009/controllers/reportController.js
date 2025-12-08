@@ -10,10 +10,22 @@ exports.getDailyReport = async (req, res) => {
             // Sertakan (Include) model User untuk mendapatkan data nama
             include: [{
                 model: User, // Model yang direlasikan
-                as: 'user',  // Alias yang didefinisikan di model Presensi (as: 'user')
+                as: 'user',  // Alias yang didefinisikan di model Presensi (as: 'user')
                 attributes: ['nama'], // Hanya ambil kolom nama
                 required: true // Gunakan INNER JOIN agar hanya mengambil record yang punya User
             }],
+            // --- KOREKSI: Tambahkan attributes untuk Presensi ---
+            attributes: [
+                'id',
+                'checkIn',
+                'checkOut',
+                'latitude',
+                'longitude',
+                'buktiFoto', // <-- DISINI KOREKSINYA
+                'createdAt',
+                'updatedAt'
+            ],
+            // ---------------------------------------------------
             order: [['createdAt', 'DESC']] // Urutkan berdasarkan waktu terbaru
         };
 
@@ -35,14 +47,9 @@ exports.getDailyReport = async (req, res) => {
             const endDate = new Date(tanggalSelesai);
             endDate.setHours(23, 59, 59, 999); 
 
-            // Definisikan kondisi rentang tanggal untuk kolom checkIn (atau createdAt)
             options.where.checkIn = {
                 [Op.between]: [startDate, endDate],
             };
-            
-            // Logika [Op.or] di kode Anda sebelumnya rumit dan berpotensi error karena mencampur filter
-            // pada kolom yang berbeda. Lebih baik memfilter berdasarkan kolom checkIn yang paling relevan.
-            
         }
         
         // --- 3. Ambil data dari database ---
@@ -56,6 +63,7 @@ exports.getDailyReport = async (req, res) => {
             checkOut: record.checkOut,
             latitude: record.latitude, // Sertakan data lokasi
             longitude: record.longitude, // Sertakan data lokasi
+            buktiFoto: record.buktiFoto, // <-- DISINI KOREKSINYA
             createdAt: record.createdAt,
             updatedAt: record.updatedAt,
         }));

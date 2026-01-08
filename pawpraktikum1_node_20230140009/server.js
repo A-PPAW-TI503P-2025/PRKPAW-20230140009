@@ -1,58 +1,44 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan"); // Logger yang lebih baik
+const morgan = require("morgan");
+const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 3001; // Gunakan env port jika ada
+const PORT = process.env.PORT || 3001;
 
-// --- 1. Impor koneksi database (PENTING) ---
-// Ini mengimpor koneksi Sequelize dari folder /models
+// 1. Impor koneksi database
 const db = require("./models");
 
-// --- 2. Kumpulkan semua impor rute di satu tempat ---
+// 2. Impor rute
 const presensiRoutes = require("./routes/presensi");
 const reportRoutes = require("./routes/reports");
 const ruteBuku = require("./routes/books");
 const authRoutes = require("./routes/auth");
-const path = require('path'); 
+const iotRoutes = require("./routes/iot");
 
+// --- 3. MIDDLEWARE (WAJIB DI ATAS SEMUA ROUTES) ---
+app.use(cors()); // Pindahkan ke paling atas agar semua rute dapat izin
+app.use(express.json());
+app.use(morgan("dev"));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-// Middleware
-app.use(cors()); // Mengizinkan Cross-Origin Resource Sharing
-app.use(express.json()); // Mem-parsing body JSON dari request
-app.use(morgan("dev")); 
+// --- 4. ROUTES (DAFTARKAN SETELAH MIDDLEWARE) ---
+app.use("/api/iot", iotRoutes);
 app.use('/api/attendance', presensiRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/auth', authRoutes);
-// --- 3. Logger manual Anda dihapus ---
-// (Karena 'morgan' sudah melakukan hal yang sama dengan lebih baik)
-// app.use((req, res, next) => {
-//   console.log(${new Date().toISOString()} - ${req.method} ${req.url});
-//   next();
-// });
+app.use("/api/books", ruteBuku);
+app.use("/api/presensi", presensiRoutes);
 
-// Routes
 app.get("/", (req, res) => {
   res.send("Home Page for API");
 });
 
-// Daftarkan semua rute API Anda
-app.use("/api/books", ruteBuku);
-app.use("/api/presensi", presensiRoutes);
-app.use("/api/reports", reportRoutes);
-
-// --- 4. Sinkronkan Database dan Jalankan Server (PERBAIKAN UTAMA) ---
-// Ini akan menjalankan db.sequelize.sync() SEBELUM server Penuh.
-// {alter: true} akan mencocokkan model Anda dengan tabel di database
-// tanpa menghapus data yang ada.
+// --- 5. SINKRONISASI DB & JALANKAN SERVER ---
 db.sequelize
   .sync({ alter: true })
   .then(() => {
     console.log("Database berhasil tersinkronisasi (altered).");
-    
-    // Jalankan server HANYA JIKA database sudah siap
     app.listen(PORT, () => {
       console.log(`Express server running at http://localhost:${PORT}/`);
     });

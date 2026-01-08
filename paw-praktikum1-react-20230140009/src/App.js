@@ -6,6 +6,7 @@ import DashboardPage from './components/DashboardPage';
 import Navbar from './components/Navbar';
 import PresensiPage from './components/PresensiPage';
 import ReportPage from './components/ReportPage';
+import SensorPage from './components/SensorPage';
 
 const Layout = ({ children }) => {
     return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/presensi" element={<Layout><PresensiPage/></Layout>} />
           <Route path="/report" element={<Layout><ReportPage/></Layout>} />
           <Route path="/reports" element={<Layout><ReportPage/></Layout>} />
+          <Route path="/monitoring" element={<SensorPage />} />
         </Routes>
         
       </div>
